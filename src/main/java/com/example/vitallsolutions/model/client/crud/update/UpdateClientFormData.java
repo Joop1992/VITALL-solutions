@@ -19,10 +19,6 @@ public class UpdateClientFormData {
     private String id;
 
     @NotNull
-    @Size(min = 4, max = 100)
-    private String userId;
-
-    @NotNull
     @Size(min = 3, max = 100)
     private String contactName;
 
@@ -33,6 +29,6 @@ public class UpdateClientFormData {
     private String address;
 
     public ClientUpdateParameters toParameters() {
-        return new ClientUpdateParameters(name, email, contactName, address, id, userId);
+        return new ClientUpdateParameters(name, email, contactName, address, id);
     }
 }

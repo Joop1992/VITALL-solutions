@@ -95,6 +95,9 @@ public class ClientController {
                 Client client = cl.get();
 
                 client.setName(formData.toParameters().getName());
+                client.setEmail(formData.toParameters().getEmail());
+                client.setContactName(formData.toParameters().getContactName());
+                client.setAddress(formData.toParameters().getAddress());
 
                 clientRepository.saveAndFlush(client);
                 clientView = this.getClientPage();
