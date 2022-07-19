@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+    <body id="body-pd">
+        <header th:replace="fragments/header :: header"> </header>
+        <div th:replace="fragments/navbar :: navbar"> </div>
+
+        <div class="bg-light">
+            <div th:replace="bankaccounts/modals/createModal :: bankaccount-create-modal"> </div>
+            <div th:replace="bankaccounts/modals/deleteModal :: bankaccount-delete-modal"> </div>
+            <div th:replace="bankaccounts/modals/updateModal :: bankaccount-update-modal"> </div>
+
+            <div style="width:100%; padding-bottom:3em; padding-top: 1em">
+                <h4 style="float: left;">Manage bank accounts</h4>
+
+                <div class="modal-button-wrapper">
+                    <button id="myModal" type="button" class="btn btn-primary vis-button-style" data-toggle="modal" data-target="#createBankAccountModal">
+                        Add new bankaccount
+                    </button>
+                </div>
+            </div>
+
+            <div class="card" style="width:100%">
+                <div class="card-body">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">IBAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="bankAccount: ${bankAccounts}">
+                                <td th:text="${bankAccount.name}"></td>
+                                <td th:text="${bankAccount.IBAN}"></td>
+                                <td class="vis-crud-button-column">
+                                    <button id="editModal" type="button" data-toggle="modal" data-target="#editBankAccountModal" class="vis-crud-button">
+                                        <i onclick="updateBankAccount(this)" th:baid="${bankAccount.id}"  th:name="${bankAccount.name}" th:iban="${bankAccount.IBAN}" class='bx bx-edit nav_icon nav_icon-crud'></i>
+                                    </button>
+                                </td>
+                                <td class="vis-crud-button-column">
+                                    <button id="deleteModal" type="button" data-toggle="modal" data-target="#deleteBankAccountModal" class="vis-crud-button">
+                                        <i onclick="deleteBankAccount(this)" th:baid="${bankAccount.id}"  th:name="${bankAccount.name}" th:iban="${bankAccount.IBAN}" class='bx bx-trash nav_icon nav_icon-crud'></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    <div th:replace="fragments/footer :: footer"> </div>
+</html>

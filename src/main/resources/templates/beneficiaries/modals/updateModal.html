@@ -1,0 +1,59 @@
+<div th:fragment="beneficiaries-update-modal" class="modal fade-in" id="editBeneficiaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBankAcountModalTitle">Edit bank account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-menu bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${editFormData}" th:action="@{/beneficiaries/edit}" method="post" id="vi-be-edit-form">
+                    <div class="form-group">
+                        <label for="be-update-form-username" class="col-form-label">User name:</label>
+                        <input type="text" disabled="true" class="form-control" id="be-update-form-username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="be-update-form-useremail" class="col-form-label">User email:</label>
+                        <input type="text" disabled="true" class="form-control" id="be-update-form-useremail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="be-update-form-fusername" class="col-form-label">User name:</label>
+                        <input type="text" disabled="true" class="form-control" id="be-update-form-fusername">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="be-update-form-fuseremail" class="col-form-label">User email:</label>
+                        <input type="text" disabled="true" class="form-control" id="be-update-form-fuseremail">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="be-update-form-percentage" class="col-form-label">Percentage:</label>
+                        <input th:field="*{percentage}" type="text" class="form-control" id="be-update-form-percentage">
+                    </div>
+
+                    <div class="form-group">
+                        <input th:field="*{id}" type="hidden" class="form-control" id="be-update-form-id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="vi-edit-be-button" type="button" onclick="document.getElementById('vi-be-edit-form').submit()" class="btn btn-primary vis-button-style">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function updateBeneficiary(element) {
+            document.getElementById("be-update-form-id").value = element.getAttribute("beid");
+            document.getElementById("be-update-form-username").value = element.getAttribute("username");
+            document.getElementById("be-update-form-useremail").value = element.getAttribute("useremail");
+            document.getElementById("be-update-form-fusername").value = element.getAttribute("fusername");
+            document.getElementById("be-update-form-fuseremail").value = element.getAttribute("fuseremail");
+            document.getElementById("be-update-form-percentage").value = element.getAttribute("percentage");
+        }
+    </script>
+</div>

@@ -1,0 +1,53 @@
+<div th:fragment="clients-delete-modal" class="modal fade-in" id="deleteClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteBeneficiaryModalTitle">Are you sure you want to delete this?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-menu bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${deleteFormData}" th:action="@{/clients/delete}" method="post" id="vi-cl-delete-form">
+                    <div class="form-group">
+                        <label for="client-delete-form-name" class="col-form-label">Company name:</label>
+                        <input disabled="true" type="text" class="form-control" id="client-delete-form-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-delete-form-email" class="col-form-label">Email:</label>
+                        <input disabled="true" type="text" class="form-control" id="client-delete-form-email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-delete-form-contact-name" class="col-form-label">Contact name:</label>
+                        <input disabled="true" type="text" class="form-control" id="client-delete-form-contact-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-delete-form-address" class="col-form-label">Address:</label>
+                        <input disabled="true" type="email" class="form-control" id="client-delete-form-address">
+                    </div>
+
+                    <div class="form-group">
+                        <input th:field="*{id}" type="hidden" class="form-control" id="client-delete-form-id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="vi-delete-cl-button" type="button" onclick="document.getElementById('vi-cl-delete-form').submit()" class="btn btn-primary vis-button-style">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function deleteClient(element) {
+            document.getElementById("client-delete-form-id").value = element.getAttribute("clid");
+            document.getElementById("client-delete-form-name").value = element.getAttribute("name");
+            document.getElementById("client-delete-form-email").value = element.getAttribute("email");
+            document.getElementById("client-delete-form-contact-name").value = element.getAttribute("contact");
+            document.getElementById("client-delete-form-address").value = element.getAttribute("address");
+        }
+    </script>
+</div>

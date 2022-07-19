@@ -1,0 +1,38 @@
+<div th:fragment="beneficiaries-create-modal" class="modal fade-in" id="createBeneficiaryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add a new beneficiary record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-menu bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${formData}" th:action="@{/beneficiaries/create}" method="post" id="vi-be-create-form">
+                    <div class="form-group">
+                        <label class="col-form-label">Beneficiary:</label>
+                        <select th:field="*{userId}" class="form-control" id="beneficiaryDropdown">
+                            <option value="0">select option</option>
+                            <option th:each="user : ${users}" th:value="${user.key}" th:text="${user.value}"></option>
+                        </select>
+                        <!--                        <input th:field="*{beneficiaryForUserId}" type="text" class="form-control" id="be-form-fuserid">-->
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Beneficiary for:</label>
+                        <select th:field="*{beneficiaryForUserID}" class="form-control" id="beneficiaryForDropdown">
+                            <option value="0">select option</option>
+                            <option th:each="user : ${users}" th:value="${user.key}" th:text="${user.value}"></option>
+                        </select>
+<!--                        <input th:field="*{beneficiaryForUserId}" type="text" class="form-control" id="be-form-fuserid">-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="vi-add-ba-button" type="button" onclick="document.getElementById('vi-be-create-form').submit()" class="btn btn-primary vis-button-style">Create new beneficiary record</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+<div th:fragment="footer">
+
+
+    <div style="width:100%">
+        <div th:if="${notify != null && notify.type == 'SUCCES'}" class="alert vis-alert-animation alert-success alert-dismissible fade show">
+            <strong>Success!</strong> <div th:text="${notify.message}"></div>
+        </div>
+
+        <!-- Error Alert -->
+        <div th:if="${notify != null && notify.type == 'ERROR'}" class="alert vis-alert-animation alert-danger alert-dismissible fade show" >
+            <strong>Error!</strong> <div th:text="${notify.message}"></div>
+        </div>
+
+        <!-- Warning Alert -->
+        <div th:if="${notify != null && notify.type == 'WARNING'}" class="alert vis-alert-animation alert-warning alert-dismissible fade show" >
+            <strong>Warning!</strong> <div th:text="${notify.message}"></div>
+        </div>
+
+        <!-- Info Alert -->
+        <div th:if="${notify != null && notify.type == 'INFO'}" class="alert vis-alert-animation alert-info alert-dismissible fade show">
+            <strong>Info!</strong><div th:text="${notify.message}"></div>
+        </div>
+    </div>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="application/javascript">
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            const showNavbar = (toggleId, navId, bodyId, headerId) =>{
+                const toggle = document.getElementById(toggleId),
+                    nav = document.getElementById(navId),
+                    bodypd = document.getElementById(bodyId),
+                    headerpd = document.getElementById(headerId)
+
+                // Validate that all variables exist
+                if(toggle && nav && bodypd && headerpd){
+                    toggle.addEventListener('click', ()=>{
+                        // show navbar
+                        nav.classList.toggle('show')
+                        // change icon
+                        toggle.classList.toggle('bx-x')
+                        // add padding to body
+                        bodypd.classList.toggle('body-pd')
+                        // add padding to header
+                        headerpd.classList.toggle('body-pd')
+                    })
+                }
+            }
+
+            showNavbar('header-toggle','nav-bar','body-pd','header')
+        });
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+    <link th:href="@{/styles/vitall-solutions.css}" rel="stylesheet" />
+</div>

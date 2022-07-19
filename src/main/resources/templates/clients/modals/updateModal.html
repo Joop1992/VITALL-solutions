@@ -1,0 +1,53 @@
+<div th:fragment="clients-update-modal" class="modal fade-in" id="editClientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editClientModalTitle">Edit client</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-menu bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${editFormData}" th:action="@{/clients/edit}" method="post" id="vi-cl-edit-form">
+                    <div class="form-group">
+                        <label for="client-update-form-name" class="col-form-label">Company name:</label>
+                        <input th:field="*{name}" type="text" class="form-control" id="client-update-form-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-update-form-email" class="col-form-label">Email:</label>
+                        <input th:field="*{email}" type="text" class="form-control" id="client-update-form-email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-update-form-contact-name" class="col-form-label">Contact name:</label>
+                        <input th:field="*{contactName}" type="text" class="form-control" id="client-update-form-contact-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client-update-form-address" class="col-form-label">Email:</label>
+                        <input th:field="*{address}" type="email" class="form-control" id="client-update-form-address">
+                    </div>
+
+                    <div class="form-group">
+                        <input th:field="*{id}" type="hidden" class="form-control" id="client-update-form-id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="vi-edit-be-button" type="button" onclick="document.getElementById('vi-be-edit-form').submit()" class="btn btn-primary vis-button-style">Save changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function updateClient(element) {
+            document.getElementById("client-update-form-id").value = element.getAttribute("clid");
+            document.getElementById("client-update-form-name").value = element.getAttribute("name");
+            document.getElementById("client-update-form-email").value = element.getAttribute("email");
+            document.getElementById("client-update-form-contact-name").value = element.getAttribute("contact");
+            document.getElementById("client-update-form-address").value = element.getAttribute("address");
+        }
+    </script>
+</div>

@@ -1,0 +1,71 @@
+<div th:fragment="bankaccount-create-modal" class="modal fade-in" id="createBankAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add a new bankaccount</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-menu bx-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:object="${formData}" th:action="@{/bankaccounts/create}" method="post" id="vi-ba-create-form">
+                    <div class="form-group">
+                        <label for="ba-form-name" class="col-form-label">Naam:</label>
+                        <input th:field="*{name}" type="text" class="form-control" id="ba-form-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ba-form-iban" class="col-form-label">IBAN:</label>
+                        <input th:field="*{IBAN}" oninput="ibanChanged()" type="text" class="form-control" id="ba-form-iban">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="vi-validate-iban-button" onclick="validateIban()" type="button" class="btn btn-primary vis-button-style">Validate IBAN</button>
+                <button id="vi-add-ba-button" type="button" onclick="document.getElementById('vi-ba-create-form').submit()" disabled="true" class="btn btn-primary vis-button-style">Create new bank account</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function validateIban() {
+            let ibanInputField = document.getElementById("ba-form-iban");
+            let addButton = document.getElementById("vi-add-ba-button");
+            let ibanValidateButton = document.getElementById("vi-validate-iban-button");
+
+            if(ibanInputField.value.length > 15) {
+                fetch("https://openiban.com/validate/" + ibanInputField.value.trim() + "?validateBankCode=true&getBIC=true")
+                    .then(data => data.json())
+                    .then(response => {
+                            if(response.valid) {
+                                ibanInputField.value = ibanInputField.value.trim();
+                                ibanInputField.classList.remove("input-invalid");
+
+                                addButton.disabled = false;
+
+                                ibanValidateButton.textContent = "IBAN is valid";
+                                ibanValidateButton.disabled = true;
+                            } else if(!response.valid) {
+                                this.inputWasInvalid()
+                            }
+                        }
+                    )
+            } else {
+                this.inputWasInvalid()
+            }
+        }
+
+        function inputWasInvalid() {
+            document.getElementById("ba-form-iban").classList.add("input-invalid");
+            document.getElementById("ba-form-iban").focus();
+        }
+
+        function ibanChanged() {
+            document.getElementById("ba-form-iban").classList.remove("input-invalid");
+            document.getElementById("vi-add-ba-button").disabled = true;
+            document.getElementById("vi-validate-iban-button").textContent = "Validate IBAN";
+            document.getElementById("vi-validate-iban-button").disabled = false;
+        }
+    </script>
+</div>
