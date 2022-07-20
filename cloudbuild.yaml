@@ -20,7 +20,7 @@ steps:
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'run.googleapis.com', '--image', 'gcr.io/vitall-solutions/vitallsolutions', '--region', 'europe-west4']
+    args: ['run', 'deploy', 'vitall-solutions', '--image', 'gcr.io/vitall-solutions/vitallsolutions', '--region', 'europe-west4']
 images: ['gcr.io/vitall-solutions/vitallsolutions']
 options:
   logging: CLOUD_LOGGING_ONLY
