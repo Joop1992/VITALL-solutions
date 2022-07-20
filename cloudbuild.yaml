@@ -3,3 +3,5 @@ steps:
     args: ['install']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '.']
+options:
+  logging: CLOUD_LOGGING_ONLY
