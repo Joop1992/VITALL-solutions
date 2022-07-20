@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
     <body id="body-pd">
-        <header th:replace="fragments/header :: header"> </header>
-        <div th:replace="fragments/navbar :: navbar"> </div>
+        <header th:replace="/fragments/header :: header"> </header>
+        <div th:replace="/fragments/navbar :: navbar"> </div>
 
         <div class="bg-light">
-            <div th:replace="bankaccounts/modals/createModal :: bankaccount-create-modal"> </div>
-            <div th:replace="bankaccounts/modals/deleteModal :: bankaccount-delete-modal"> </div>
-            <div th:replace="bankaccounts/modals/updateModal :: bankaccount-update-modal"> </div>
+            <div th:replace="/bankaccounts/modals/createModal :: bankaccount-create-modal"> </div>
+            <div th:replace="/bankaccounts/modals/deleteModal :: bankaccount-delete-modal"> </div>
+            <div th:replace="/bankaccounts/modals/updateModal :: bankaccount-update-modal"> </div>
 
             <div style="width:100%; padding-bottom:3em; padding-top: 1em">
                 <h4 style="float: left;">Manage bank accounts</h4>
