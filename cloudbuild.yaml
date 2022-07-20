@@ -1,8 +1,23 @@
+#steps:
+#  - name: 'gcr.io/cloud-builders/mvn'
+#    args: [ 'install' ]
+#  - name: gcr.io/cloud-builders/docker
+#    args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '--build-arg=JAR_FILE=target/vis-artifact.jar', '.']
+#images: ['gcr.io/vitall-solutions/vitallsolutions']
+#options:
+#  logging: CLOUD_LOGGING_ONLY
+
 steps:
-  - name: 'gcr.io/cloud-builders/mvn'
-    args: [ 'install' ]
-  - name: gcr.io/cloud-builders/docker
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '--build-arg=JAR_FILE=target/vis-artifact.jar', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/vitall-solutions/vitallsolutions']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'run.googleapis.com', '--image', 'gcr.io/vitall-solutions/vitallsolutions', '--region', 'europe-west4']
 images: ['gcr.io/vitall-solutions/vitallsolutions']
 options:
   logging: CLOUD_LOGGING_ONLY
