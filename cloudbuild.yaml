@@ -8,6 +8,9 @@
 #  logging: CLOUD_LOGGING_ONLY
 
 steps:
+  # Maven install
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: [ 'install' ]
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '--build-arg=JAR_FILE=target/vis-artifact.jar', '.']
