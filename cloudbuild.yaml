@@ -2,7 +2,7 @@ steps:
   - name: 'gcr.io/cloud-builders/mvn'
     args: [ 'install' ]
   - name: gcr.io/cloud-builders/docker
-    args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '--build-arg=JAR_FILE=target/vis-artifact', '.']
+    args: ['build', '-t', 'gcr.io/vitall-solutions/vitallsolutions', '--build-arg=JAR_FILE=target/vis-artifact.jar', '.']
 images: ['gcr.io/vitall-solutions/vitallsolutions']
 options:
   logging: CLOUD_LOGGING_ONLY
