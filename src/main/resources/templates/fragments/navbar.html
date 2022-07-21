@@ -8,7 +8,7 @@
             </a>
 
 
-            <div class="nav_list">
+            <div class="nav_list" id="vis-navbar">
                 <div th:if="${groups.contains('Admin')}">
                     <a th:href="@{/users/view}" class="nav_link" th:classappend="${selectedPage == 'Users'} ? active : nothing">
                         <i class='bx bx-user nav_icon'></i>
@@ -74,4 +74,20 @@
             <span class="nav_name">SignOut</span>
         </a>
     </nav>
+    <script>
+        const items = document.getElementById("vis-navbar").getElementsByClassName('active');
+        const visible = [...items].filter((el) => {
+            // jQuery-like :visible selector
+            return !!( el.offsetWidth || el.offsetHeight || el.getClientRects().length );
+        });
+
+        if (visible.length > 0) {
+            document.getElementById("vis-navbar").scrollTo({
+                top: items[0].offsetTop - 130,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onload=function(){ setTimeout(function(){ 		window.scrollTo(0, 1); 	}, 0); }
+    </script>
 </div>
