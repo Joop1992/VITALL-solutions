@@ -152,8 +152,15 @@ a {
 }
 
 .nav_list {
+    margin-top: -42px;
     overflow-y: auto;
-    height: calc(70vh - 40px);
+    height: calc(80vh - 85px);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.nav_list::-webkit-scrollbar {
+    display: none;
 }
 
 @media screen and (min-width: 768px) {
