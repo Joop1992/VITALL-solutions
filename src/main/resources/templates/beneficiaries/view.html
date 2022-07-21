@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org">
     <body id="body-pd">
-        <header th:replace="fragments/header :: header"> </header>
-        <div th:replace="fragments/navbar :: navbar"> </div>
+        <header th:replace="/fragments/header :: header"> </header>
+        <div th:replace="/fragments/navbar :: navbar"> </div>
 
         <div class="bg-light">
             <div th:replace="beneficiaries/modals/createModal :: beneficiaries-create-modal"> </div>
@@ -55,5 +55,5 @@
             </div>
         </div>
     </body>
-    <div th:replace="fragments/footer :: footer"> </div>
+    <div th:replace="/fragments/footer :: footer"> </div>
 </html>
