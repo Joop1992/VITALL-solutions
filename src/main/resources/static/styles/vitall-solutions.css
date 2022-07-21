@@ -151,6 +151,11 @@ a {
     background-color: rgba(0,0,0,0)!important;
 }
 
+.nav_list {
+    overflow-y: auto;
+    height: calc(70vh - 40px);
+}
+
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
