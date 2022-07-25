@@ -21,7 +21,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user: ${users}">
+
+                    <tr th:each="user,iterStat : ${items}" th:id="${'item-' + iterStat.index}">
 <!--                        <td th:text="${user.id}"/>-->
                         <td th:text="${user.name}" />
                         <td th:text="${user.email}" />
@@ -37,6 +38,7 @@
                     </tbody>
                 </table>
             </div>
+            <div th:replace="/pagination/pagination :: pagination"> </div>
         </div>
     </div>
 </body>

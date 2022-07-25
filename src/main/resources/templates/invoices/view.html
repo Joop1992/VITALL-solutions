@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="https://thymeleaf.org">
+<body id="body-pd">
+<header th:replace="/fragments/header :: header"> </header>
+<div th:replace="/fragments/navbar :: navbar"> </div>
 
+<div class="vis-bg-light">
+    <div th:replace="/invoices/modals/createModal :: invoice-create-modal"> </div>
+    <div th:replace="/invoices/modals/deleteModal :: invoice-delete-modal"> </div>
+    <div th:replace="/invoices/modals/updateModal :: invoice-update-modal"> </div>
+    <div th:replace="/invoices/modals/manageInvoiceLinesModal :: invoice-manage-lines-modal"> </div>
+
+    <div style="width:100%; padding-bottom:3em; padding-top: 1em">
+        <h4 style="float: left;">Manage invoices</h4>
+
+        <div class="modal-button-wrapper">
+            <button id="myModal" type="button" class="btn btn-primary vis-button-style" data-toggle="modal" data-target="#createInvoiceModal">
+                Create and send invoices
+            </button>
+            <button id="vi-manage-iv-button" type="button"  class="btn btn-primary vis-button-style" data-toggle="modal" data-target="#manageInvoiceLinesModal">
+                Manage invoice lines
+            </button>
+        </div>
+    </div>
+
+    <div class="card" style="width:100%">
+        <div class="card-body">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">IBAN</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="invoice: ${invoices}">
+                    <td th:text="${bankAccount.name}"></td>
+                    <td th:text="${bankAccount.IBAN}"></td>
+                    <td class="vis-crud-button-column">
+                        <button id="editModal" type="button" data-toggle="modal" data-target="#editInvoiceModal" class="vis-crud-button">
+                            <i onclick="updateInvoice(this)" th:ivid="${invoice.id}"  class='bx bx-edit nav_icon nav_icon-crud'></i>
+                        </button>
+                    </td>
+                    <td class="vis-crud-button-column">
+                        <button id="deleteModal" type="button" data-toggle="modal" data-target="#deleteInvoiceModal" class="vis-crud-button">
+                            <i onclick="deleteInvoice(this)" th:ivid="${invoice.id}"  class='bx bx-trash nav_icon nav_icon-crud'></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </body>
+<div th:replace="/fragments/footer :: footer"> </div>
 </html>

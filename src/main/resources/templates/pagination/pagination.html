@@ -1,0 +1,219 @@
+<div th:fragment="pagination" class="pagination-container">
+    <ul class="page" id="pagination-wrapper">
+        <li class="page__btn"><i class='bx bx-chevron-left nav_icon'></i></li>
+
+<!--        <li class="page__dots">...</li>-->
+        <li class="page__btn" id="last-icon"><i class='bx bx-chevron-right nav_icon'></i></li>
+    </ul>
+
+
+
+    <script th:inline="javascript">
+        var list = /*[[${items}]]*/ [];
+        var selectedPage = 1;
+
+        initializePagination();
+
+        function initializePagination() {
+            determineAmountOfPages()
+            for (let i = 1; i <= pages; i++) {
+                let li = buildPaginationPage(i);
+
+                if (i === pages && pages > 6) {
+                    addPaginationDots();
+                }
+
+                document.getElementById("pagination-wrapper").insertBefore(li, document.getElementById("last-icon"));
+            }
+        }
+
+        function determineAmountOfPages() {
+            let pages = 1;
+            let itemCounter = 0;
+            let itemsPerPage = 19;
+
+            list.forEach(listItem => {
+                itemCounter++;
+                if (itemCounter > itemsPerPage) {
+                    itemCounter = 0;
+                    pages++;
+                }
+            })
+            return pages;
+        }
+
+        function buildPaginationPage(i) {
+            let li = document.createElement('li');
+            li.textContent = i;
+            li.classList.add("page__numbers");
+            li.onclick = function () {
+                showPage(i)
+            };
+            if (i === 1) {
+                li.classList.add("active");
+            }
+
+            return li;
+        }
+
+        function addPaginationDots() {
+            let li = document.createElement("li");
+            li.textContent = "...";
+            li.classList.add("page__dots");
+            document.getElementById("pagination-wrapper").insertBefore(li, document.getElementById("last-icon"));
+        }
+
+        function renderPagination() {
+            //TODO set all the right items to active and inactive
+            //TODO render the right pages here when there are a lot the pages should shift
+            //Do this using the selectedPage and remove all pages that are further out than -3 and +3
+            //TODO render the state for previous and next page icon
+        }
+
+        function next() {
+            if(selectedPage + 1 < list.length) {
+                showPage(selectedPage + 1);
+            }
+        }
+
+        function previous() {
+            if(selectedPage -1 > 0) {
+                showPage(selectedPage - 1);
+            }
+        }
+
+        function showPage(page) {
+            if(page !== selectedPage) {
+                console.log("show page: " + page);
+            }
+
+            selectedPage = page;
+            renderPagination();
+        }
+
+    </script>
+
+    <style>
+        :root {
+            --primary: #23adad;
+            --greyLight: #23adade1;
+            --greyLight-2: #cbe0dd;
+            --greyDark: #2d4848;
+        }
+
+        pagination-container {
+            box-sizing: border-box;
+            font-size: 62.5%;
+            overflow-y: scroll;
+            font-family: "Poppins", sans-serif;
+            letter-spacing: 0.6px;
+            line-height: 1.4;
+            -webkit-user-select: none;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
+
+        .pagination-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .items-list {
+            max-width: 90vw;
+            margin: 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 3rem;
+            justify-content: center;
+            align-content: center;
+        }
+        @media only screen and (max-width: 600px) {
+            .items-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .item {
+            width: 10rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--greyDark);
+            cursor: pointer;
+        }
+        .item span {
+            background: #ffffff;
+            box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+            border-radius: 0.6rem;
+            padding: 2rem;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+        }
+        .item:hover span {
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+        .item p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: var(--greyLight);
+        }
+
+        .page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.6rem;
+            background: #ffffff;
+            box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+        }
+        .page__numbers, .page__btn, .page__dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .page__dots {
+            width: 2.6rem;
+            height: 2.6rem;
+            color: var(--first-color);
+            cursor: initial;
+        }
+        .page__numbers {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 100%;
+        }
+        .page__numbers:hover {
+            color: var(--first-color);
+        }
+        .page__numbers.active {
+            color: #ffffff;
+            background: var(--first-color);
+            font-weight: 600;
+            border: 1px solid var(--first-color);
+        }
+        .page__btn {
+            color: var(--first-color);
+            pointer-events: none;
+        }
+        .page__btn.active {
+            color: var(--first-color);
+            pointer-events: initial;
+        }
+        .page__btn.active:hover {
+            color: var(--first-color);
+        }
+    </style>
+
+</div>

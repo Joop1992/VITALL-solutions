@@ -71,13 +71,13 @@ public class UserController {
             modelAndView.setViewName("/users/view");
             modelAndView.addObject("editFormData", new UpdateUserFormData());
             modelAndView.addObject("selectedPage", "Users");
-            modelAndView.addObject("users", userRepository.findAll());
+            modelAndView.addObject("items", userRepository.findAll());
 
             return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndViewInitializer().initialize();
             modelAndView.setViewName("/bankaccounts/view");
-            modelAndView.addObject("bankAccounts", bankAccountRepository.findByUserId(userInfoProvider.getUserId()));
+            modelAndView.addObject("items", bankAccountRepository.findByUserId(userInfoProvider.getUserId()));
             modelAndView.addObject("formData", new CreateBankAccountFormData());
             modelAndView.addObject("deleteFormData", new DeleteBankAccountFormData());
             modelAndView.addObject("editFormData", new UpdateBankAccountFormData());

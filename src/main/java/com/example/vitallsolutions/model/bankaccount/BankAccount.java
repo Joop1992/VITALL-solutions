@@ -22,10 +22,6 @@ public class BankAccount {
         this.userId = userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -38,25 +34,13 @@ public class BankAccount {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Column(name = "iban", nullable = false)
     public String getIBAN() {
         return this.IBAN;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
-    }
-
     @Column(name = "userId", nullable = false)
     public String getUserId() {
         return this.userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }
